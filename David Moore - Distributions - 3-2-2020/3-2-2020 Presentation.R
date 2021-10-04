@@ -316,13 +316,13 @@ qnorm(0.025, lower.tail = F)
 
 # The F distribution
 
-# The F distribution is a ratio of variances.
+# The F statistic is a ratio of variances.
 
 # Variances are always positive because they are
 # calculated as the sums of squared residuals divided
 # by the number of observations. Therefore, the
-# F distribution cannot be negative since it is the
-# ratio of two positive numbers.
+# F distribution cannot be negative since F values are
+# ratios of two positive numbers.
 
 x <- seq(0, 5, 0.01)
 F_1_1 <- df(x, 1, 1)
