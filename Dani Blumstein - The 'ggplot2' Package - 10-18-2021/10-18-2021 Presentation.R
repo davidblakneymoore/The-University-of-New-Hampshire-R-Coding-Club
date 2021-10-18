@@ -87,7 +87,7 @@ ggplot(data = mtcars, aes(x = mpg, y = disp, color = as.factor(gear))) +
   labs(color = "Gear") +
   geom_smooth() +
   theme_classic() +
-  labs(x = "Miles per Gallon", y = "Displacement", title = "Plot")
+  labs(x = "Miles per Gallon", y = "Displacement", title = "Plot Title")
 
 
 # Center the Plot Title
@@ -98,7 +98,7 @@ ggplot(data = mtcars, aes(x = mpg, y = disp, color = as.factor(gear))) +
   labs(color = "Gear") +
   geom_smooth() +
   theme_classic() +
-  labs(x = "Miles per Gallon", y = "Displacement", title = "Plot") +
+  labs(x = "Miles per Gallon", y = "Displacement", title = "Plot Title") +
   theme(plot.title = element_text(hjust = 0.5))
 
 
@@ -110,7 +110,7 @@ ggplot(data = mtcars, aes(x = mpg, y = disp, color = as.factor(gear))) +
   labs(color = "Gear") +
   geom_smooth() +
   theme_classic() +
-  labs(x = "Miles per Gallon", y = "Displacement", title = "Plot") +
+  labs(x = "Miles per Gallon", y = "Displacement", title = "Plot Title") +
   theme(plot.title = element_text(hjust = 0.5)) +
   facet_wrap(~am)
 
@@ -123,7 +123,7 @@ ggplot(data = mtcars, aes(x = mpg, y = disp, color = as.factor(gear))) +
   labs(color = "Gear") +
   geom_smooth() +
   theme_classic() +
-  labs(x = "Miles per Gallon", y = "Displacement", title = "Plot") +
+  labs(x = "Miles per Gallon", y = "Displacement", title = "Plot Title") +
   theme(plot.title = element_text(hjust = 0.5)) +
   facet_wrap(~am) +
   scale_x_continuous(breaks = seq(10, 40, 10))
@@ -140,7 +140,7 @@ plot1 <- ggplot(data = mtcars, aes(x = mpg, y = disp, color = as.factor(gear))) 
   labs(color = "Gear") +
   geom_smooth() +
   theme_classic() +
-  labs(x = "Miles per Gallon", y = "Displacement", title = "Plot") +
+  labs(x = "Miles per Gallon", y = "Displacement", title = "Plot Title") +
   theme(plot.title = element_text(hjust = 0.5)) +
   facet_wrap(~am) +
   scale_x_continuous(breaks = seq(10, 40, 10))
@@ -160,7 +160,7 @@ plot1
 
 plot2 <- ggplot(data = mtcars, aes(x = as.factor(cyl), y = mpg, fill = as.factor(am))) +
   geom_boxplot() +
-  labs(fill = "Manual or Automatic") +
+  labs(x = "Number of Cylinders", y = "Miles per Gallon", title = "Comparing the Gas Mileage of Cars\nWith Automatic and Manual Transmissions\nfor Engines With Different Numbers of Cylinders Separately", fill = "Manual or Automatic") +
   scale_fill_manual(values = c('red', 'green', 'blue')) +
   stat_compare_means(aes(group = am), label = 'p.signif', method = 't.test', na.rm = F, label.y = 33)
 plot2
