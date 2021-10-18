@@ -4,6 +4,12 @@
 # 10-16-2021
 
 
+# Look at the 'ggplot2' Cheat Sheet
+
+# Click 'Help', then click 'Cheatsheets', then
+# click 'Data Visualization with ggplot2'.
+
+
 # Install Packages
 
 if(!require (ggplot2)) {
