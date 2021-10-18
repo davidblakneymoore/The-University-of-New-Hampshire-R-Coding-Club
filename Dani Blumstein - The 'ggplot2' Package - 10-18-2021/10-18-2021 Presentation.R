@@ -132,7 +132,7 @@ ggplot(data = mtcars, aes(x = mpg, y = disp, color = as.factor(gear))) +
 # Save the Plot as an Object
 
 # You can't save 'base' plots as objects, but
-# you can save 'ggplot2' plots as objects
+# you can save 'ggplot2' plots as objects.
 
 plot1 <- ggplot(data = mtcars, aes(x = mpg, y = disp, color = as.factor(gear))) +
   geom_point() +
