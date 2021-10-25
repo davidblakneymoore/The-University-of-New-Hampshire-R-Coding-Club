@@ -22,6 +22,15 @@ if (x > 4) {
 # statement. The code inside the curly brackets is
 # ran if the logical expression evaluates to 'TRUE'.
 
+# What if 'x' is less than 4?
+
+x <- 3
+
+if (x > 4) {
+  print("'x' is greater than 4.")
+}
+
+# Nothing happens.
 
 # We can get more complex as well.
 
