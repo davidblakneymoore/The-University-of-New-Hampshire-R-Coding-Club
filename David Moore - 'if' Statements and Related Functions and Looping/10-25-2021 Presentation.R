@@ -1,0 +1,278 @@
+
+# 'if' Statements and Related Functions
+# and Looping
+
+# David Moore
+
+# October 25th, 2021
+
+
+# 'if' Statements
+
+# Let's try an 'if' statement and talk about syntax.
+
+x <- 5
+
+if (x > 4) {
+  print("'x' is greater than 4.")
+}
+
+# In the parenthesis there is a logical expression.
+# In the curly brackets is the body of the 'if'
+# statement. The code inside the curly brackets is
+# ran if the logical expression evaluates to 'TRUE'.
+
+
+# We can get more complex as well.
+
+x <- 4
+
+if (x > 4) {
+  print("'x' is greater than 4.")
+} else if (x <= 4 & x > 2) {
+  print("'x' is less than or equal to 4 and greater than 2.")
+} else if (x <= 2) {
+  print("'x' is less than or equal to 2.")
+}
+
+# With 'else' statements, you don't need to
+# provide a conditional statement to be
+# evaluated if there aren't any other options.
+
+if (x > 4) {
+  print("'x' is greater than 4.")
+} else {
+  print("'x' is not greater than 4.")
+}  
+
+# Let's try something a little more complex.
+
+x <- 1:10
+
+if (x > 4) {
+  print("'x' is greater than 4.")
+} else if (x <= 4 & x > 2) {
+  print("'x' is less than or equal to 4 and greater than 2.")
+} else if (x <= 2) {
+  print("'x' is less than or equal to 2.")
+}
+
+# Why didn't this work?
+
+# 'if' statements are not vectorized.
+
+# What can we do?
+
+# Let's use the 'ifelse()' function.
+
+help(ifelse)
+
+(our_data <- data.frame(x = 1:10))
+
+our_data$new_column <- ifelse(x > 5, "'x' is greater than 5", "'x' is not greater than 5")
+our_data
+
+# What if we want there to be multiple outputs
+# depending on different conditions like we coded
+# for in our second 'if' statement above?
+
+our_data$another_new_column <- ifelse(x > 8, "'x' is greater than 8", ifelse(x <= 8 & x > 4, "'x' is less than or equal to 8 and greater than 4", ifelse(x <= 4 & x > 2, "'x' is less than or equal to 4 and greater than 2", "'x' is less than or equal to 2")))
+our_data
+
+# We accomplished this by nesting 'ifelse()' functions.
+
+# There has to be a better way. Let's try to use
+# the 'cut()' function.
+
+?cut
+
+our_data$one_last_column <- cut(our_data$x, c(-Inf, 2, 4, 6, 8, Inf), c('Very small', 'Small', 'Medium', 'Large', 'Very large'))
+our_data
+
+
+# Looping
+
+# 'for' Loops
+
+# There are two ways to do loops. We can loop through
+# the elements of a vector or we can loop through
+# the positions of a vector.
+
+# Let's start looping through elements and not
+# positions.
+
+LETTERS
+
+for (i in LETTERS) {
+  print(paste("The letter", i))
+}
+
+# Notice how the syntax is similar to that of
+# functions and of 'if' statements.
+
+# What does 'i' represent?
+
+# 'i' represents all the elements in the 'LETTERS'
+# vector. Each time it goes through the loop, the
+# value of 'i' is a different element of this
+# vector.
+
+# Let's try to use positions now.
+
+# Remember that colons can be used to generate
+# a sequence of integers.
+
+1:10
+
+for (i in 1:length(LETTERS)) {
+  print(paste("The letter", LETTERS[i]))
+}
+
+# In this case, 'i' no longer represents elements
+# of the 'LETTERS' vector. Now, it represents
+# positions along the vector. Notice how I used
+# square brackets containing 'i' to tell R where
+# along the vector we are.
+
+# Let's do one more example.
+
+(vector_1 <- round(rnorm(10), 2))
+
+for (i in 1:length(vector_1)) {
+  print(paste("The ", i, "th element of vector_1 is ", vector_1[i], sep = ""))
+}
+
+# Here is a tip. It's better to use the 'seq_len()'
+# function than to use the '1:length()' syntax
+# because of what happens if the length of a vector
+# is '0'.
+
+1:0
+seq_len(0)
+
+vector_2 <- NULL
+
+for (i in 1:length(vector_2)) {
+  print(paste("The ", i, "th element of vector_2 is ", vector_2[i], sep = ""))
+}
+
+for (i in seq_len(length(vector_2))) {
+  print(paste("The ", i, "th element of vector_2 is ", vector_2[i], sep = ""))
+}
+
+# In most cases, you won't have this problem, but
+# who knows what you'll run into.
+
+# Let's look at some more complex loops.
+
+# Can we loop through multiple things at once?
+
+All_Possible_Matchups <- NULL
+k <- 1
+
+for (i in 1:(length(LETTERS) - 1)) {
+  for (j in (i + 1):length(LETTERS)) {
+    All_Possible_Matchups[k] <- paste(LETTERS[i], "vs.", LETTERS[j])
+    k <- k + 1
+  }
+}
+
+All_Possible_Matchups
+
+# Let's take a minute to break this down.
+
+# First, we initialized a vector we would create
+# with the 'for' loop.
+
+# Since we're looping through two things, we can't
+# use 'i' or 'j' to index since things will get
+# overwritten. We use a new indexing variable ('k')
+# that we have to specify increases by 1 each time
+# the inner loop runs.
+
+# You'll notice we had to use different variables for
+# each of the loops - I used 'i' for the outer loop
+# and 'j' for the inner loop.
+
+# You'll also notice that the values the inner loop
+# looped through depended on the value that the outer
+# loop was on. For the inner loop, I said that we'd
+# start at 'i + 1' and go to the end.
+
+# Finally, you'll notice that the outer loop only went
+# up to the second-to-last position.
+
+# What else can we do with loops?
+
+# We can use the 'break' command.
+
+for (i in 1:10) {
+  print(paste("I love the number", i))
+  if (i > 5) {
+    break
+  }
+}
+
+# Are there other types of loops?
+
+# There are 2 other types of loops. Be careful when
+# using these, though, since if you make a mistake
+# in your code, your computer will run it indefinitely
+# and it might crash.
+
+# There are 'while' loops.
+
+q <- 1
+while (q < 5) {
+  print(paste("The loop is still going; we're only at the value ", q))
+  q <- q + 1
+}
+
+# If you don't specify how 'q' increases each time in
+# this above example, you risk running the loop
+# indefinitely.
+
+# There are also 'repeat' loops. Here's an example with
+# perfect squares.
+
+Number_of_Terms <- 100
+x <- 1
+repeat {
+  print(x ^ 2)
+  x <- x + 1
+  if (x >= Number_of_Terms) {
+    break
+  }
+}
+
+# Note that by increasing 'x' by 1 each time and by
+# including a 'break' statement there is no risk of
+# running the loop indefinitely.
+
+# In addition to 'break' statements, there are also
+# 'next' statements. If we want to skip over a
+# particular iteration of a loop, we can use a 'next'
+# statement.
+
+for (i in 1:10) {
+  print(i)
+  if (i == 5) {
+    next
+  }
+}
+
+# That didn't work because it printed the value before
+# it evaluated the 'if' statement.
+
+for (i in 1:10) {
+  if (i == 5) {
+    next
+  }
+  print(i)
+}
+
+# As a final comment, looping is more computationally
+# intensive than using functions in the apply family
+# like 'apply()', 'lapply()', and 'mapply()'. I'd
+# suggest becoming comfortable with both but using
+# functions in the apply family preferentially.
