@@ -54,6 +54,8 @@ if (x > 4 & x < 8) {
 
 # 'else' Statements
 
+x <- 4.5
+
 if (x > 4) {
   print("'x' is greater than 4.")
 } else if (x <= 4 & x > 2) {
@@ -62,9 +64,53 @@ if (x > 4) {
   print("'x' is less than or equal to 2.")
 }
 
+# If the first logical expression is evaluated
+# to 'FALSE', an 'if' statement followed by an
+# 'else' will continue on to the next 'if'
+# statement. If the first logical expression is
+# evaluated to 'TRUE', the operation will stop
+# and it will not continue on to the next 'if'
+# statement regardless of whether the condition
+# in the next 'if' statement is 'TRUE'.
+
+# For example, look at the next chunk of code.
+# If 'x' is 4.5, the conditions for both the
+# first and the second 'if' statements will be
+# evaluated to 'TRUE', but only the first 'if'
+# statement will run.
+
+if (x > 4) {
+  print("'x' is greater than 4.")
+} else if (x <= 5 & x > 2) {
+  print("'x' is less than or equal to 4 and greater than 2.")
+} else if (x <= 2) {
+  print("'x' is less than or equal to 2.")
+}
+
+# Alternatively, if the 'if' statements from
+# above aren't separated by 'else's, they will
+# run independently. Both the first and second
+# 'if' statements will run.
+
+if (x > 4) {
+  print("'x' is greater than 4.")
+}
+if (x <= 5 & x > 2) {
+  print("'x' is less than or equal to 4 and greater than 2.")
+}
+if (x <= 2) {
+  print("'x' is less than or equal to 2.")
+}
+
+# Again, without separating 'if' statements
+# by 'else' statements, each 'if' statement
+# is run independently.
+
 # With 'else' statements, you don't need to
 # provide a conditional statement to be
 # evaluated if there aren't any other options.
+
+x <- 3
 
 if (x > 4) {
   print("'x' is greater than 4.")
@@ -102,20 +148,22 @@ if (x > 4) {
 # Let's use the 'ifelse()' function.
 
 help(ifelse)
+?ifelse
 
 (our_data <- data.frame(x = 1:10))
 
-our_data$new_column <- ifelse(x > 5, "'x' is greater than 5", "'x' is not greater than 5")
+our_data$new_column <- ifelse(our_data$x > 5, "'x' is greater than 5", "'x' is not greater than 5")
 our_data
 
 # What if we want there to be multiple outputs
 # depending on different conditions like we coded
 # for in our second 'if' statement above?
 
-our_data$another_new_column <- ifelse(x > 8, "'x' is greater than 8", ifelse(x <= 8 & x > 4, "'x' is less than or equal to 8 and greater than 4", ifelse(x <= 4 & x > 2, "'x' is less than or equal to 4 and greater than 2", "'x' is less than or equal to 2")))
-our_data
+# We can accomplish this by nesting 'ifelse()'
+# functions.
 
-# We accomplished this by nesting 'ifelse()' functions.
+our_data$another_new_column <- ifelse(our_data$x > 8, "'x' is greater than 8", ifelse(our_data$x <= 8 & our_data$x > 4, "'x' is less than or equal to 8 and greater than 4", ifelse(our_data$x <= 4 & x > 2, "'x' is less than or equal to 4 and greater than 2", "'x' is less than or equal to 2")))
+our_data
 
 # There has to be a better way. Let's try to use
 # the 'cut()' function.
@@ -183,10 +231,13 @@ for (i in 1:length(vector_1)) {
 # because of what happens if the length of a vector
 # is '0'.
 
+1:10
+seq_len(10)
+
 1:0
 seq_len(0)
 
-vector_2 <- NULL
+(vector_2 <- NULL)
 
 for (i in 1:length(vector_2)) {
   print(paste("The ", i, "th element of vector_2 is ", vector_2[i], sep = ""))
@@ -241,6 +292,19 @@ All_Possible_Matchups
 # What specifically will happen if, instead of using
 # 'k', we use either 'i' or 'j' to index the output
 # vector 'All_Possible_Matchups'?
+
+# If 'i' is used to index, the output vector,
+# All_Possible_Matchups, will only contain
+# (length(American_League_East_Teams) - 1) elements
+# since that's how many 'i's there were. When the
+# inner 'for' loop is running, only the last value
+# from it will be stored in the vector before the
+# outer 'for' loop advances to the next value of 'i'.
+
+# If 'j' is used to index, each time the inner 'for'
+# loop runs, it will overwrite values in the output
+# vector, All_Possible_Matchups, each time the outer
+# 'for' loop advances to a new value of 'i'.
 
 # You'll also notice that the values the inner loop
 # looped through depended on the value that the outer
@@ -339,10 +403,14 @@ for (i in 1:10) {
 Sys.time()
 
 for (i in seq_len(length(state.abb))) {
-  print(Sys.time())
   # Perhaps you are doing some long operation here
+  print("Step 1")
   print(Sys.time())
-  # Perhaps you're doing another long operation here
+  # Perhaps you are doing another long operation here
+  print("Step 2")
+  print(Sys.time())
+  # Perhaps you're doing yet another long operation here
+  print("Step 3")
   print(Sys.time())
 }
 
