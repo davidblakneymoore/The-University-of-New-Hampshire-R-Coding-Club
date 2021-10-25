@@ -25,7 +25,25 @@ if (x > 4) {
 
 # We can get more complex as well.
 
-x <- 4
+
+# Nesting 'if' Statements
+
+if (x > 4) {
+  if (x < 8) {
+    print("'x' is between 4 and 8.")
+  }
+}
+
+# Remembering logical 'and' and logical 'or', we know
+# we can also write the above chunk of code like this
+# too.
+
+if (x > 4 & x < 8) {
+  print("'x' is between 4 and 8.")
+}
+
+
+# 'else' Statements
 
 if (x > 4) {
   print("'x' is greater than 4.")
@@ -43,7 +61,16 @@ if (x > 4) {
   print("'x' is greater than 4.")
 } else {
   print("'x' is not greater than 4.")
-}  
+}
+
+# We can do other operations inside 'if'
+# statements too.
+
+if (x > 4) {
+  x ^ 2
+} else {
+  x ^ 3
+}
 
 # Let's try something a little more complex.
 
@@ -142,7 +169,7 @@ for (i in 1:length(vector_1)) {
   print(paste("The ", i, "th element of vector_1 is ", vector_1[i], sep = ""))
 }
 
-# Here is a tip. It's better to use the 'seq_len()'
+# Here's a tip. It's better to use the 'seq_len()'
 # function than to use the '1:length()' syntax
 # because of what happens if the length of a vector
 # is '0'.
@@ -167,12 +194,14 @@ for (i in seq_len(length(vector_2))) {
 
 # Can we loop through multiple things at once?
 
+(American_League_East_Teams <- c("Boston Red Sox", "Toronto Blue Jays", "Tampa Bay Rays", "Baltimore Orioles", "New York Yankees"))
+
 All_Possible_Matchups <- NULL
 k <- 1
 
-for (i in 1:(length(LETTERS) - 1)) {
-  for (j in (i + 1):length(LETTERS)) {
-    All_Possible_Matchups[k] <- paste(LETTERS[i], "vs.", LETTERS[j])
+for (i in 1:(length(American_League_East_Teams) - 1)) {
+  for (j in (i + 1):length(American_League_East_Teams)) {
+    All_Possible_Matchups[k] <- paste(American_League_East_Teams[i], "versus", American_League_East_Teams[j])
     k <- k + 1
   }
 }
@@ -184,15 +213,25 @@ All_Possible_Matchups
 # First, we initialized a vector we would create
 # with the 'for' loop.
 
+# The inner 'for' loop runs through all its
+# values while the outer 'for' loop stays on one
+# value. When the inner for loop has gone through
+# all its values, the outer for loop goes on to
+# its next value and the inner loop starts again.
+
+# You'll notice we had to use different variables for
+# each of the loops - I used 'i' for the outer loop
+# and 'j' for the inner loop.
+
 # Since we're looping through two things, we can't
 # use 'i' or 'j' to index since things will get
 # overwritten. We use a new indexing variable ('k')
 # that we have to specify increases by 1 each time
 # the inner loop runs.
 
-# You'll notice we had to use different variables for
-# each of the loops - I used 'i' for the outer loop
-# and 'j' for the inner loop.
+# What specifically will happen if, instead of using
+# 'k', we use either 'i' or 'j' to index the output
+# vector 'All_Possible_Matchups'?
 
 # You'll also notice that the values the inner loop
 # looped through depended on the value that the outer
@@ -212,6 +251,17 @@ for (i in 1:10) {
     break
   }
 }
+
+# What if we reordered what's in the body of this loop?
+
+for (i in 1:10) {
+  if (i > 5) {
+    break
+  }
+  print(paste("I love the number", i))
+}
+
+# Why are these different?
 
 # Are there other types of loops?
 
@@ -269,6 +319,22 @@ for (i in 1:10) {
     next
   }
   print(i)
+}
+
+# When you have a loop that takes a ridiculously long
+# time to run, you could use 'print()' and 'Sys.time()'
+# to print the time at which it reaches a certain step.
+# This may be helpful for diagnosing which steps are
+# taking the longest.
+
+Sys.time()
+
+for (i in seq_len(length(state.abb))) {
+  print(Sys.time())
+  # Perhaps you are doing some long operation here
+  print(Sys.time())
+  # Perhaps you're doing another long operation here
+  print(Sys.time())
 }
 
 # As a final comment, looping is more computationally
