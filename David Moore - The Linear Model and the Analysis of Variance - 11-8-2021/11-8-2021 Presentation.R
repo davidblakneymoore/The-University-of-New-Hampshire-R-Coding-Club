@@ -2,6 +2,10 @@
 # The Linear Model and the Analysis of Variance
 
 
+# Today I'll be explaining some conceptual stuff
+# pertaining to statistics. We won't go over too any
+# programming stuff.
+
 # Dummy Variables
 
 lm(iris$Sepal.Length ~ iris$Species)
@@ -58,7 +62,8 @@ lm(iris$Sepal.Length ~ iris$Species)
 
 # Here's what the model actually looks like:
 
-# Sepal.Length = 5.006 + (0.930 * Speciesversicolor) + (1.582 * Speciesvirginica)
+# Sepal.Length = 5.006 + (0.930 * Speciesversicolor) +
+# (1.582 * Speciesvirginica)
 
 # Remember that the 'Speciesversicolor' and
 # 'Speciesvirginica' variables are either '0's or
@@ -76,9 +81,9 @@ mean(iris$Sepal.Length[iris$Species == 'setosa'])
 # How does the analysis of variance work?
 
 Quantile <- seq(0, 27, 0.01)
-Group_1 <- dnorm(x, 10, 2)
-Group_2 <- dnorm(x, 17, 2)
-Group_3 <- dnorm(x, 19, 2)
+Group_1 <- dnorm(Quantile, 10, 2)
+Group_2 <- dnorm(Quantile, 17, 2)
+Group_3 <- dnorm(Quantile, 19, 2)
 plot(Group_1 ~ Quantile, type = 'l', col = 1, main = 'Looking for Differences\nBetween 3 Groups\nWhich All Have the Same Variance', xlab = 'Quantile', ylab = 'Density')
 lines(Group_2 ~ Quantile, col = 2)
 lines(Group_3 ~ Quantile, col = 3)
@@ -133,9 +138,9 @@ legend('topright', legend = paste("Group", 1:3), lty = 1, col = 1:3)
 # Here's an example to prove my point.
 
 Quantile <- seq(0, 27, 0.01)
-Group_1 <- dnorm(x, 10, 2)
-Group_2 <- dnorm(x, 17, 2)
-Group_3 <- dnorm(x, 19, 8)
+Group_1 <- dnorm(Quantile, 10, 2)
+Group_2 <- dnorm(Quantile, 17, 2)
+Group_3 <- dnorm(Quantile, 19, 8)
 plot(Group_1 ~ Quantile, type = 'l', col = 1, main = 'Looking for Differences\nBetween 3 Groups\nWhich Have Different Variances', xlab = 'Quantile', ylab = 'Density')
 lines(Group_2 ~ Quantile, col = 2)
 lines(Group_3 ~ Quantile, col = 3)
@@ -246,7 +251,7 @@ if (!require (car)) {
 }
 library (car)
 
-leveneTest(Response ~ Group, center = mean, data = My_Data)
+leveneTest(Response ~ as.factor(Group), center = mean, data = My_Data)
 
 # How does Levene's test work?
 
