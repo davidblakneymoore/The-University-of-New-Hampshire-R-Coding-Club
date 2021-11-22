@@ -59,7 +59,7 @@ Recursive_Function <- function (x) {
     stop ("'x' is not a data frame or a list.")
   }
   if (class(x) == 'list') {
-    lapply(x, Recursive_Function_2)
+    lapply(x, Recursive_Function)
   } else if (class(x) == 'data.frame') {
     x$Column_3 <- x$Column_2 ^ 2
     return (x)
