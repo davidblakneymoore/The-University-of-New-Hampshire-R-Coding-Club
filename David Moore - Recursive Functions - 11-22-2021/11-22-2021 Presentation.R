@@ -27,6 +27,7 @@ Function_1 <- function (x) {
 Function_1(2)
 Function_1(1)
 
+
 # Error Messages
 
 # We can also write error messages into our
