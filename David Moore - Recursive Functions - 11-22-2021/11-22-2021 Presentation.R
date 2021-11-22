@@ -65,7 +65,8 @@ Function_2(0)
 # marks).
 
 (Character_String_1 <- "My dog's name is Sally.")
-(Character_String_2 <- 'Bob said, "please sit down."')
+(Character_String_2 <- "He said, 'not now.'")
+(Character_String_3 <- 'Bob said, "please sit down."')
 
 # We'll talk more about these backslashes when we
 # talk about regular expressions.
