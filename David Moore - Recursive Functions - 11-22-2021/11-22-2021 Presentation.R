@@ -10,6 +10,9 @@
 
 # A recursive function is a function that calls itself.
 
+# Let's write a function to calculate the nth
+# term of the Fibonacci sequence.
+
 Fibonacci_Sequence_Function <- function (x) {
   if (x %% 1 != 0 | x < 1 | length(x) != 1 | !is.numeric(x)) {
     stop ("'x' is not a positive integer.")
